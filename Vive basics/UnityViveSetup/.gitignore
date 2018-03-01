@@ -1,0 +1,50 @@
+## Windows files
+*.ini
+
+## Other files and folders
+.dropbox
+
+##Unity - local files
+*/Build
+*/Temp
+*/obj
+*/Library
+
+*.csproj
+*.unityproj
+*.sln
+
+#Visual studio files
+*.tlog
+*.log
+/Debug
+**/Debug
+*.opendb
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vcxproj.filters
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+#Data files and images
+*.csv
+*.xlsx
+*.fig
+*.pdf
