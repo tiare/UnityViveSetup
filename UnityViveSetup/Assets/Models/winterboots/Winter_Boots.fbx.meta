@@ -1,0 +1,244 @@
+fileFormatVersion: 2
+guid: 0016a4ee882692944ac1f70c0f00ba16
+timeCreated: 1518106834
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Add_Light
+    100002: Back_Light
+    100004: Boots
+    100006: Boots_Scene
+    100008: Ground_Plane
+    100010: Left_Boot
+    100012: Left_Boot_Knob_01
+    100014: Left_Boot_Knob_010
+    100016: Left_Boot_Knob_011
+    100018: Left_Boot_Knob_012
+    100020: Left_Boot_Knob_02
+    100022: Left_Boot_Knob_03
+    100024: Left_Boot_Knob_04
+    100026: Left_Boot_Knob_05
+    100028: Left_Boot_Knob_06
+    100030: Left_Boot_Knob_07
+    100032: Left_Boot_Knob_08
+    100034: Left_Boot_Knob_09
+    100036: Left_Boot_Main
+    100038: Left_Boot_Rope
+    100040: Main_Light
+    100042: Render_Cam
+    100044: Right_Boot
+    100046: Right_Boot_Knob_004
+    100048: Right_Boot_Knob_01
+    100050: Right_Boot_Knob_010
+    100052: Right_Boot_Knob_011
+    100054: Right_Boot_Knob_012
+    100056: Right_Boot_Knob_02
+    100058: Right_Boot_Knob_03
+    100060: Right_Boot_Knob_05
+    100062: Right_Boot_Knob_06
+    100064: Right_Boot_Knob_07
+    100066: Right_Boot_Knob_08
+    100068: Right_Boot_Knob_09
+    100070: Right_Boot_Main
+    100072: Right_Boot_Rope
+    100074: Upper_Light
+    100076: //RootNode
+    400000: Add_Light
+    400002: Back_Light
+    400004: Boots
+    400006: Boots_Scene
+    400008: Ground_Plane
+    400010: Left_Boot
+    400012: Left_Boot_Knob_01
+    400014: Left_Boot_Knob_010
+    400016: Left_Boot_Knob_011
+    400018: Left_Boot_Knob_012
+    400020: Left_Boot_Knob_02
+    400022: Left_Boot_Knob_03
+    400024: Left_Boot_Knob_04
+    400026: Left_Boot_Knob_05
+    400028: Left_Boot_Knob_06
+    400030: Left_Boot_Knob_07
+    400032: Left_Boot_Knob_08
+    400034: Left_Boot_Knob_09
+    400036: Left_Boot_Main
+    400038: Left_Boot_Rope
+    400040: Main_Light
+    400042: Render_Cam
+    400044: Right_Boot
+    400046: Right_Boot_Knob_004
+    400048: Right_Boot_Knob_01
+    400050: Right_Boot_Knob_010
+    400052: Right_Boot_Knob_011
+    400054: Right_Boot_Knob_012
+    400056: Right_Boot_Knob_02
+    400058: Right_Boot_Knob_03
+    400060: Right_Boot_Knob_05
+    400062: Right_Boot_Knob_06
+    400064: Right_Boot_Knob_07
+    400066: Right_Boot_Knob_08
+    400068: Right_Boot_Knob_09
+    400070: Right_Boot_Main
+    400072: Right_Boot_Rope
+    400074: Upper_Light
+    400076: //RootNode
+    2300000: Ground_Plane
+    2300002: Left_Boot_Knob_01
+    2300004: Left_Boot_Knob_010
+    2300006: Left_Boot_Knob_011
+    2300008: Left_Boot_Knob_012
+    2300010: Left_Boot_Knob_02
+    2300012: Left_Boot_Knob_03
+    2300014: Left_Boot_Knob_04
+    2300016: Left_Boot_Knob_05
+    2300018: Left_Boot_Knob_06
+    2300020: Left_Boot_Knob_07
+    2300022: Left_Boot_Knob_08
+    2300024: Left_Boot_Knob_09
+    2300026: Left_Boot_Main
+    2300028: Left_Boot_Rope
+    2300030: Right_Boot_Knob_004
+    2300032: Right_Boot_Knob_01
+    2300034: Right_Boot_Knob_010
+    2300036: Right_Boot_Knob_011
+    2300038: Right_Boot_Knob_012
+    2300040: Right_Boot_Knob_02
+    2300042: Right_Boot_Knob_03
+    2300044: Right_Boot_Knob_05
+    2300046: Right_Boot_Knob_06
+    2300048: Right_Boot_Knob_07
+    2300050: Right_Boot_Knob_08
+    2300052: Right_Boot_Knob_09
+    2300054: Right_Boot_Main
+    2300056: Right_Boot_Rope
+    3300000: Ground_Plane
+    3300002: Left_Boot_Knob_01
+    3300004: Left_Boot_Knob_010
+    3300006: Left_Boot_Knob_011
+    3300008: Left_Boot_Knob_012
+    3300010: Left_Boot_Knob_02
+    3300012: Left_Boot_Knob_03
+    3300014: Left_Boot_Knob_04
+    3300016: Left_Boot_Knob_05
+    3300018: Left_Boot_Knob_06
+    3300020: Left_Boot_Knob_07
+    3300022: Left_Boot_Knob_08
+    3300024: Left_Boot_Knob_09
+    3300026: Left_Boot_Main
+    3300028: Left_Boot_Rope
+    3300030: Right_Boot_Knob_004
+    3300032: Right_Boot_Knob_01
+    3300034: Right_Boot_Knob_010
+    3300036: Right_Boot_Knob_011
+    3300038: Right_Boot_Knob_012
+    3300040: Right_Boot_Knob_02
+    3300042: Right_Boot_Knob_03
+    3300044: Right_Boot_Knob_05
+    3300046: Right_Boot_Knob_06
+    3300048: Right_Boot_Knob_07
+    3300050: Right_Boot_Knob_08
+    3300052: Right_Boot_Knob_09
+    3300054: Right_Boot_Main
+    3300056: Right_Boot_Rope
+    4300000: Left_Boot_Main
+    4300002: Left_Boot_Knob_01
+    4300004: Left_Boot_Knob_02
+    4300006: Left_Boot_Knob_03
+    4300008: Left_Boot_Knob_04
+    4300010: Left_Boot_Knob_05
+    4300012: Left_Boot_Knob_06
+    4300014: Left_Boot_Knob_07
+    4300016: Left_Boot_Knob_08
+    4300018: Left_Boot_Knob_09
+    4300020: Left_Boot_Knob_010
+    4300022: Left_Boot_Knob_011
+    4300024: Left_Boot_Knob_012
+    4300026: Left_Boot_Rope
+    4300028: Right_Boot_Main
+    4300030: Right_Boot_Knob_01
+    4300032: Right_Boot_Knob_02
+    4300034: Right_Boot_Knob_03
+    4300036: Right_Boot_Knob_004
+    4300038: Right_Boot_Knob_05
+    4300040: Right_Boot_Knob_06
+    4300042: Right_Boot_Knob_07
+    4300044: Right_Boot_Knob_08
+    4300046: Right_Boot_Knob_09
+    4300048: Right_Boot_Knob_010
+    4300050: Right_Boot_Knob_011
+    4300052: Right_Boot_Knob_012
+    4300054: Right_Boot_Rope
+    4300056: Ground_Plane
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
