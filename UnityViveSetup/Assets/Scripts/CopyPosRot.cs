@@ -11,8 +11,10 @@ public class CopyPosRot : MonoBehaviour
     public Transform copyFrom;
     public Vector3 positionOffset = Vector3.zero;
 
+    public bool copyPos = false;
     public bool lockXPos = false, lockYPos = false, lockZPos = false;
     public Vector3 lockedPosition = Vector3.zero;
+    public bool copyRot = false;
     public bool lockXRot = false, lockYRot = false, lockZRot = false;
     public Vector3 lockedRotation = Vector3.zero;
 
@@ -39,6 +41,9 @@ public class CopyPosRot : MonoBehaviour
 
         currentRot = copyFrom.rotation;
         tempRot = Vector3.zero;
+
+        lockedPosition = transform.position;
+        lockedRotation = transform.rotation.eulerAngles;
     }
 
     // Update is called once per frame
@@ -53,14 +58,17 @@ public class CopyPosRot : MonoBehaviour
         tempPos.y = lockYPos ? lockedPosition.y : currentPos.y;
         tempPos.z = lockZPos ? lockedPosition.z : currentPos.z;
 
-        transform.position = Vector3.zero;
+        //transform.position = Vector3.zero;
 
         currentRot = copyFrom.rotation;
         tempRot.x = lockXRot ? lockedRotation.x : currentRot.eulerAngles.x;
         tempRot.y = lockYRot ? lockedRotation.y : currentRot.eulerAngles.y;
         tempRot.z = lockZRot ? lockedRotation.z : currentRot.eulerAngles.z;
 
-        transform.rotation = Quaternion.Euler(tempRot);
-        transform.position = tempPos;
+        if(copyRot)
+            transform.rotation = Quaternion.Euler(tempRot);
+
+        if(copyPos)
+            transform.position = tempPos;
     }
 }
