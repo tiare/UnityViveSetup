@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) Leap Motion, Inc. 2011-2017.                                 *
- * Leap Motion proprietary and  confidential.                                 *
+ * Copyright (C) Leap Motion, Inc. 2011-2018.                                 *
+ * Leap Motion proprietary and confidential.                                  *
  *                                                                            *
  * Use subject to the terms of the Leap Motion SDK Agreement available at     *
  * https://developer.leapmotion.com/sdk_agreement, or another agreement       *
@@ -26,7 +26,7 @@ namespace Leap.Unity.Animation.Internal {
         if (_cachedInstance == null) {
           _cachedInstance = FindObjectOfType<TweenRunner>();
           if (_cachedInstance == null) {
-                        _cachedInstance = new UnityEngine.GameObject("__Tween Runner__").AddComponent<TweenRunner>();
+            _cachedInstance = new GameObject("__Tween Runner__").AddComponent<TweenRunner>();
             _cachedInstance.gameObject.hideFlags = HideFlags.HideAndDontSave;
           }
         }

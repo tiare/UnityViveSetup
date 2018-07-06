@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) Leap Motion, Inc. 2011-2017.                                 *
- * Leap Motion proprietary and  confidential.                                 *
+ * Copyright (C) Leap Motion, Inc. 2011-2018.                                 *
+ * Leap Motion proprietary and confidential.                                  *
  *                                                                            *
  * Use subject to the terms of the Leap Motion SDK Agreement available at     *
  * https://developer.leapmotion.com/sdk_agreement, or another agreement       *
@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 namespace Leap.Unity {
   public class KeyEnableGameObjects : MonoBehaviour {
-    public List<UnityEngine.GameObject> targets;
+    public List<GameObject> targets;
     [Header("Controls")]
     public KeyCode unlockHold = KeyCode.RightShift;
     public KeyCode toggle = KeyCode.T;

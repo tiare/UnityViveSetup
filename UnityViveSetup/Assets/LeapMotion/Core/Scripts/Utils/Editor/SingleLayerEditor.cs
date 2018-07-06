@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) Leap Motion, Inc. 2011-2017.                                 *
- * Leap Motion proprietary and  confidential.                                 *
+ * Copyright (C) Leap Motion, Inc. 2011-2018.                                 *
+ * Leap Motion proprietary and confidential.                                  *
  *                                                                            *
  * Use subject to the terms of the Leap Motion SDK Agreement available at     *
  * https://developer.leapmotion.com/sdk_agreement, or another agreement       *
@@ -50,8 +50,18 @@ namespace Leap.Unity {
         label.tooltip = tooltipAttribute.tooltip;
       }
 
+      bool originalMixedValue = EditorGUI.showMixedValue;
+      if (layerProperty.hasMultipleDifferentValues) {
+        EditorGUI.showMixedValue = true;
+      }
+
+      EditorGUI.BeginChangeCheck();
       index = EditorGUI.Popup(position, label, index, _layerNames);
-      layerProperty.intValue = _layerValues[index];
+      if (EditorGUI.EndChangeCheck()) {
+        layerProperty.intValue = _layerValues[index];
+      }
+
+      EditorGUI.showMixedValue = originalMixedValue;
     }
 
     private void ensureLayersInitialized() {

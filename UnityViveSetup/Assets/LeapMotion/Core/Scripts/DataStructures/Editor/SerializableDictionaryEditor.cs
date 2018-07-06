@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) Leap Motion, Inc. 2011-2017.                                 *
- * Leap Motion proprietary and  confidential.                                 *
+ * Copyright (C) Leap Motion, Inc. 2011-2018.                                 *
+ * Leap Motion proprietary and confidential.                                  *
  *                                                                            *
  * Use subject to the terms of the Leap Motion SDK Agreement available at     *
  * https://developer.leapmotion.com/sdk_agreement, or another agreement       *
@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace Leap.Unity {
 
-  [CustomPropertyDrawer(typeof(SDictionaryAttribute))]
+  [CustomPropertyDrawer(typeof(SerializableDictionaryBase), useForChildren: true)]
   public class SerializableDictionaryEditor : PropertyDrawer {
 
     private ReorderableList _list;
@@ -115,10 +115,11 @@ namespace Leap.Unity {
 
     private void drawElementCallback(Rect rect, int index, bool isActive, bool isFocused) {
       Rect leftRect = rect;
-      leftRect.width *= 0.5f;
+      leftRect.width *= (fieldInfo.GetValue(_currProperty.serializedObject.targetObject) as ISerializableDictionary).KeyDisplayRatio();
 
-      Rect rightRect = leftRect;
-      rightRect.x += rightRect.width;
+      Rect rightRect = rect;
+      rightRect.x += leftRect.width;
+      rightRect.width -= leftRect.width;
 
       Pair pair = _pairs[index];
 

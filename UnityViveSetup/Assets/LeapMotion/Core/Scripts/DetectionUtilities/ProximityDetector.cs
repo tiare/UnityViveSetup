@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) Leap Motion, Inc. 2011-2017.                                 *
- * Leap Motion proprietary and  confidential.                                 *
+ * Copyright (C) Leap Motion, Inc. 2011-2018.                                 *
+ * Leap Motion proprietary and confidential.                                  *
  *                                                                            *
  * Use subject to the terms of the Leap Motion SDK Agreement available at     *
  * https://developer.leapmotion.com/sdk_agreement, or another agreement       *
@@ -44,7 +44,7 @@ namespace Leap.Unity{
     [Header("Detector Targets")]
     [Tooltip("The list of target objects.")]
     [DisableIf("UseLayersNotList", true)]
-    public UnityEngine.GameObject[] TargetObjects;
+    public GameObject[] TargetObjects;
 
     /**
     * Include objects with the specified tag in the list of target objects.
@@ -97,7 +97,7 @@ namespace Leap.Unity{
     public bool ShowGizmos = true;
 
     private IEnumerator proximityWatcherCoroutine;
-    private UnityEngine.GameObject _currentObj = null;
+    private GameObject _currentObj = null;
 
     protected virtual void OnValidate() {
       //Activate value cannot be less than deactivate value
@@ -109,8 +109,8 @@ namespace Leap.Unity{
     void Awake() {
       proximityWatcherCoroutine = proximityWatcher();
       if (TagName != "") {
-                UnityEngine.GameObject[] taggedObjects = UnityEngine.GameObject.FindGameObjectsWithTag(TagName);
-                List<UnityEngine.GameObject> targets = new List<UnityEngine.GameObject>(taggedObjects.Length + TargetObjects.Length);
+        GameObject[] taggedObjects = GameObject.FindGameObjectsWithTag(TagName);
+        List<GameObject> targets = new List<GameObject>(taggedObjects.Length + TargetObjects.Length);
         for (int t = 0; t < TargetObjects.Length; t++) {
           targets.Add(TargetObjects[t]);
         }
@@ -152,7 +152,7 @@ namespace Leap.Unity{
             }
           } else {
             for (int obj = 0; obj < TargetObjects.Length; obj++) {
-                            UnityEngine.GameObject target = TargetObjects[obj];
+              GameObject target = TargetObjects[obj];
               if (distanceSquared(target) < onSquared) {
                 _currentObj = target;
                 proximityState = true;
@@ -171,7 +171,7 @@ namespace Leap.Unity{
       }
     }
 
-    private float distanceSquared(UnityEngine.GameObject target){
+    private float distanceSquared(GameObject target){
       Collider targetCollider = target.GetComponent<Collider>();
       Vector3 closestPoint;
       if(targetCollider != null){
@@ -205,5 +205,5 @@ namespace Leap.Unity{
    * @since 4.1.2
    */
   [System.Serializable]
-  public class ProximityEvent : UnityEvent <UnityEngine.GameObject> {}
+  public class ProximityEvent : UnityEvent <GameObject> {}
 }

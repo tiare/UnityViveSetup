@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) Leap Motion, Inc. 2011-2017.                                 *
- * Leap Motion proprietary and  confidential.                                 *
+ * Copyright (C) Leap Motion, Inc. 2011-2018.                                 *
+ * Leap Motion proprietary and confidential.                                  *
  *                                                                            *
  * Use subject to the terms of the Leap Motion SDK Agreement available at     *
  * https://developer.leapmotion.com/sdk_agreement, or another agreement       *
@@ -120,14 +120,7 @@ namespace Leap.Unity.Attachments {
           }
 
           var leapHand = handAccessors[i]();
-
-          #if UNITY_EDITOR
-          if (Hands.Provider != null) {
-            if (leapHand == null && !Application.isPlaying) {
-              leapHand = TestHandFactory.MakeTestHand(0, i, i == 0).TransformedCopy(UnityMatrixExtension.GetLeapMatrix(Hands.Provider.transform));
-            }
-          }
-          #endif
+          attachmentHand.isTracked = leapHand != null;
 
           using (new ProfilerSample(attachmentHand.gameObject.name + " Update Points")) {
             foreach (var point in attachmentHand.points) {
@@ -181,7 +174,7 @@ namespace Leap.Unity.Attachments {
 
         // Construct any missing AttachmentHand objects.
         if (_attachmentHands[0] == null) {
-                    UnityEngine.GameObject obj = new UnityEngine.GameObject();
+          GameObject obj = new GameObject();
           #if UNITY_EDITOR
           Undo.RegisterCreatedObjectUndo(obj, "Created GameObject");
           #endif
@@ -192,7 +185,7 @@ namespace Leap.Unity.Attachments {
         if (_attachmentHands[0].transform.parent != this.transform) _attachmentHands[0].transform.parent = this.transform;
 
         if (_attachmentHands[1] == null) {
-                    UnityEngine.GameObject obj = new UnityEngine.GameObject();
+          GameObject obj = new GameObject();
           #if UNITY_EDITOR
           Undo.RegisterCreatedObjectUndo(obj, "Created GameObject");
           #endif

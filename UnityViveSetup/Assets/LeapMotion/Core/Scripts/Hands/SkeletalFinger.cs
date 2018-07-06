@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) Leap Motion, Inc. 2011-2017.                                 *
- * Leap Motion proprietary and  confidential.                                 *
+ * Copyright (C) Leap Motion, Inc. 2011-2018.                                 *
+ * Leap Motion proprietary and confidential.                                  *
  *                                                                            *
  * Use subject to the terms of the Leap Motion SDK Agreement available at     *
  * https://developer.leapmotion.com/sdk_agreement, or another agreement       *
@@ -25,9 +25,7 @@ namespace Leap.Unity{
     }
   
     /** Updates the finger bones and joints by setting their positions and rotations. */
-    public override void UpdateFinger() {
-      Debug.Log("SkeletalFinger.SetPositions()");
-  
+    public override void UpdateFinger() {  
       SetPositions();
     }
   

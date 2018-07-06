@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) Leap Motion, Inc. 2011-2017.                                 *
- * Leap Motion proprietary and  confidential.                                 *
+ * Copyright (C) Leap Motion, Inc. 2011-2018.                                 *
+ * Leap Motion proprietary and confidential.                                  *
  *                                                                            *
  * Use subject to the terms of the Leap Motion SDK Agreement available at     *
  * https://developer.leapmotion.com/sdk_agreement, or another agreement       *
@@ -10,17 +10,17 @@
 using UnityEngine;
 using NUnit.Framework;
 
-namespace Leap.Unity {
+namespace Leap.Unity.Tests {
 
   public class TransformUtilTests {
 
-    private UnityEngine.GameObject _gameObject;
-    private UnityEngine.GameObject _child;
+    private GameObject _gameObject;
+    private GameObject _child;
 
     [SetUp]
     public void Setup() {
-            _gameObject = new UnityEngine.GameObject("__TEST OBJECT__");
-            _child = new UnityEngine.GameObject("__CHILD OBJECT__");
+      _gameObject = new GameObject("__TEST OBJECT__");
+      _child = new GameObject("__CHILD OBJECT__");
       _child.transform.SetParent(_gameObject.transform);
       _gameObject.transform.rotation = Quaternion.Euler(45, 123, 888);
       _child.transform.rotation = Quaternion.Euler(2, 44, 99);

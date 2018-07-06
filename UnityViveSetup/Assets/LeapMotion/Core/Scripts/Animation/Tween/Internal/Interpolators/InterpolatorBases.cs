@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) Leap Motion, Inc. 2011-2017.                                 *
- * Leap Motion proprietary and  confidential.                                 *
+ * Copyright (C) Leap Motion, Inc. 2011-2018.                                 *
+ * Leap Motion proprietary and confidential.                                  *
  *                                                                            *
  * Use subject to the terms of the Leap Motion SDK Agreement available at     *
  * https://developer.leapmotion.com/sdk_agreement, or another agreement       *
@@ -30,6 +30,8 @@ namespace Leap.Unity.Animation.Internal {
     public abstract bool isValid { get; }
 
     public void OnSpawn() { }
+
+    public void OnRecycle() { }
 
     public abstract void Dispose();
   }
@@ -141,6 +143,8 @@ namespace Leap.Unity.Animation.Internal {
     public void OnSpawn() { }
 
     public void Dispose() { }
+
+    public void OnRecycle() { }
   }
 
 }

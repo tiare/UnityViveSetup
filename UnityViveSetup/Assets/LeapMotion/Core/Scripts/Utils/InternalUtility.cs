@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) Leap Motion, Inc. 2011-2017.                                 *
- * Leap Motion proprietary and  confidential.                                 *
+ * Copyright (C) Leap Motion, Inc. 2011-2018.                                 *
+ * Leap Motion proprietary and confidential.                                  *
  *                                                                            *
  * Use subject to the terms of the Leap Motion SDK Agreement available at     *
  * https://developer.leapmotion.com/sdk_agreement, or another agreement       *
@@ -57,7 +57,7 @@ namespace Leap.Unity {
     /// This method functions in the same was as gameObject.AddComponent, except it
     /// includes Undo functionality by default when running in the editor.
     /// </summary>
-    public static T AddComponent<T>(UnityEngine.GameObject obj) where T : Component {
+    public static T AddComponent<T>(GameObject obj) where T : Component {
 #if UNITY_EDITOR
       if (!Application.isPlaying) {
         return Undo.AddComponent<T>(obj);
@@ -72,7 +72,7 @@ namespace Leap.Unity {
     /// This method functions in the same was as gameObject.AddComponent, except it
     /// includes Undo functionality by default when running in the editor.
     /// </summary>
-    public static Component AddComponent(UnityEngine.GameObject obj, Type type) {
+    public static Component AddComponent(GameObject obj, Type type) {
 #if UNITY_EDITOR
       if (!Application.isPlaying) {
         return Undo.AddComponent(obj, type);

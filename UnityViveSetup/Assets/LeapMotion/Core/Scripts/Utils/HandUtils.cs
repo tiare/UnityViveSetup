@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) Leap Motion, Inc. 2011-2017.                                 *
- * Leap Motion proprietary and  confidential.                                 *
+ * Copyright (C) Leap Motion, Inc. 2011-2018.                                 *
+ * Leap Motion proprietary and confidential.                                  *
  *                                                                            *
  * Use subject to the terms of the Leap Motion SDK Agreement available at     *
  * https://developer.leapmotion.com/sdk_agreement, or another agreement       *
@@ -11,13 +11,17 @@ using Leap.Unity.Query;
 using UnityEngine.Events;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 namespace Leap.Unity {
 
+  /// <summary>
+  /// Static convenience methods and extension methods for getting useful Hand data.
+  /// </summary>
   public static class Hands {
 
-    private static LeapServiceProvider s_provider;
-    private static UnityEngine.GameObject s_leapRig;
+    private static LeapProvider s_provider;
+    private static GameObject s_leapRig;
 
     static Hands() {
       InitStatic();
@@ -27,9 +31,16 @@ namespace Leap.Unity {
     private static void InitStaticOnNewScene(Scene unused, Scene unused2) {
       InitStatic();
     }
+
     private static void InitStatic() {
-            s_provider = UnityEngine.GameObject.FindObjectOfType<LeapServiceProvider>();
-      if (s_provider == null) return;
+      s_provider = Object.FindObjectOfType<LeapServiceProvider>();
+      if (s_provider == null) {
+        s_provider = Object.FindObjectOfType<LeapProvider>();
+        if (s_provider == null) {
+          return;
+        }
+      }
+
       Camera providerCamera = s_provider.GetComponentInParent<Camera>();
       if (providerCamera == null) return;
       if (providerCamera.transform.parent == null) return;
@@ -38,38 +49,38 @@ namespace Leap.Unity {
 
     /// <summary>
     /// Static convenience accessor for the Leap camera rig. This is the parent
-    /// of the Camera that contains a LeapServiceProvider in one of its children,
+    /// of the Camera that contains a LeapProvider in one of its children,
     /// or null if there is no such GameObject.
     /// </summary>
-    public static GameObject Rig {
+    public static GameObject CameraRig {
       get {
         if (s_leapRig == null) {
           InitStatic();
-          if (s_leapRig == null) {
-            Debug.LogWarning("Camera has no parent; Rig will return null.");
-          }
         }
         return s_leapRig;
       }
     }
 
     /// <summary>
-    /// Static convenience accessor for the LeapServiceProvider.
+    /// Static convenience accessor for a LeapProvider in the scene. Preference is given
+    /// to a LeapServiceProvider if there is one.
+    /// 
+    /// If static memory currently has no reference for the provider (or if it was
+    /// destroyed), this call will search the scene for a LeapProvider and cache it to be
+    /// returned next time.
+    /// 
+    /// If there is no LeapProvider in your scene, this getter
+    /// will return null. Be warned that calling this regularly can be expensive if
+    /// LeapProviders often don't exist in your scene or are frequently destroyed.
     /// </summary>
-    public static LeapServiceProvider Provider {
+    public static LeapProvider Provider {
       get {
         if (s_provider == null) {
           InitStatic();
-          if (s_provider == null) {
-            Debug.LogWarning("No LeapServiceProvider found in the scene.");
-          }
         }
         return s_provider;
       }
     }
-
-    [System.Serializable]
-    public class HandEvent : UnityEvent<Hand> { }
 
     /// <summary>
     /// Returns the first hand of the argument Chirality in the current frame,
@@ -173,6 +184,20 @@ namespace Leap.Unity {
     /// </summary>
     public static Finger GetPinky(this Hand hand) {
       return hand.Fingers[(int)Leap.Finger.FingerType.TYPE_PINKY];
+    }
+
+    /// <summary>
+    /// Returns a Pose consisting of the tracked hand's palm position and rotation.
+    /// </summary>
+    public static Pose GetPalmPose(this Hand hand) {
+      return new Pose(hand.PalmPosition.ToVector3(), hand.Rotation.ToQuaternion());
+    }
+
+    /// <summary>
+    /// As Hand.SetTransform(), but takes a Pose as input for convenience.
+    /// </summary>
+    public static void SetPalmPose(this Hand hand, Pose newPalmPose) {
+      hand.SetTransform(newPalmPose.position, newPalmPose.rotation);
     }
 
     /// <summary>
@@ -321,9 +346,171 @@ namespace Leap.Unity {
     /// Transforms a hand to a position and rotation.
     /// </summary>
     public static void SetTransform(this Hand hand, Vector3 position, Quaternion rotation) {
-      hand.Transform(Vector3.zero, (rotation * Quaternion.Inverse(hand.Rotation.ToQuaternion())));
+      hand.Transform(Vector3.zero, Quaternion.Slerp((rotation * Quaternion.Inverse(hand.Rotation.ToQuaternion())), Quaternion.identity, 0f));
       hand.Transform(position - hand.PalmPosition.ToVector3(), Quaternion.identity);
     }
+
+  }
+
+  /// <summary>
+  /// Utility methods for constructing and manipulating Leap hand object data.
+  /// </summary>
+  public static class HandUtils {
+
+    /// <summary>
+    /// Fills the Hand object with the provided hand data. You can pass null for the
+    /// fingers input; this will leave the hand's finger data unmodified.
+    /// </summary>
+    public static void Fill(this Hand toFill,
+                            long frameID,
+                            int id,
+                            float confidence,
+                            float grabStrength,
+                            float grabAngle,
+                            float pinchStrength,
+                            float pinchDistance,
+                            float palmWidth,
+                            bool isLeft,
+                            float timeVisible,
+                            /* Arm arm,*/
+                            List<Finger> fingers,
+                            Vector palmPosition,
+                            Vector stabilizedPalmPosition,
+                            Vector palmVelocity,
+                            Vector palmNormal,
+                            LeapQuaternion rotation,
+                            Vector direction,
+                            Vector wristPosition) {
+      toFill.FrameId                      = frameID;
+      toFill.Id                           = id;
+      toFill.Confidence                   = confidence;
+      toFill.GrabStrength                 = grabStrength;
+      toFill.GrabAngle                    = grabAngle;
+      toFill.PinchStrength                = pinchStrength;
+      toFill.PinchDistance                = pinchDistance;
+      toFill.PalmWidth                    = palmWidth;
+      toFill.IsLeft                       = isLeft;
+      toFill.TimeVisible                  = timeVisible;
+      if (fingers != null) toFill.Fingers = fingers;
+      toFill.PalmPosition                 = palmPosition;
+      toFill.StabilizedPalmPosition       = stabilizedPalmPosition;
+      toFill.PalmVelocity                 = palmVelocity;
+      toFill.PalmNormal                   = palmNormal;
+      toFill.Rotation                     = rotation;
+      toFill.Direction                    = direction;
+      toFill.WristPosition                = wristPosition;
+    }
+
+    /// <summary>
+    /// Fills the Bone object with the provided bone data.
+    /// </summary>
+    public static void Fill(this Bone toFill,
+                            Vector prevJoint,
+                            Vector nextJoint,
+                            Vector center,
+                            Vector direction,
+                            float length,
+                            float width,
+                            Bone.BoneType type,
+                            LeapQuaternion rotation) {
+      toFill.PrevJoint  = prevJoint;
+      toFill.NextJoint  = nextJoint;
+      toFill.Center     = center;
+      toFill.Direction  = direction;
+      toFill.Length     = length;
+      toFill.Width      = width;
+      toFill.Type       = type;
+      toFill.Rotation   = rotation;
+    }
+
+    /// <summary>
+    /// Fills the Finger object with the provided finger data. You can pass null for
+    /// bones; A null bone will not modify the underlying hand's data for that bone.
+    /// </summary>
+    public static void Fill(this Finger toFill,
+                            long frameId,
+                            int handId,
+                            int fingerId,
+                            float timeVisible,
+                            Vector tipPosition,
+                            Vector direction,
+                            float width,
+                            float length,
+                            bool isExtended,
+                            Finger.FingerType type,
+                            Bone metacarpal   = null,
+                            Bone proximal     = null,
+                            Bone intermediate = null,
+                            Bone distal       = null) {
+      toFill.Id                     = handId;
+      toFill.HandId                 = handId;
+      toFill.TimeVisible            = timeVisible;
+      toFill.TipPosition            = tipPosition;
+      toFill.Direction              = direction;
+      toFill.Width                  = width;
+      toFill.Length                 = length;
+      toFill.IsExtended             = isExtended;
+      toFill.Type                   = type;
+
+      if (metacarpal   != null) toFill.bones[0] = metacarpal;
+      if (proximal     != null) toFill.bones[1] = proximal;
+      if (intermediate != null) toFill.bones[2] = intermediate;
+      if (distal       != null) toFill.bones[3] = distal;
+    }
+
+    /// <summary>
+    /// Fills the Arm object with the provided arm data.
+    /// </summary>
+    public static void Fill(this Arm toFill,
+                            Vector elbow,
+                            Vector wrist,
+                            Vector center,
+                            Vector direction,
+                            float length,
+                            float width,
+                            LeapQuaternion rotation) {
+      toFill.PrevJoint  = elbow;
+      toFill.NextJoint  = wrist;
+      toFill.Center     = center;
+      toFill.Direction  = direction;
+      toFill.Length     = length;
+      toFill.Width      = width;
+      toFill.Rotation   = rotation;
+    }
+
+    /// <summary>
+    /// Fills the hand's PalmVelocity data based on the
+    /// previous hand object and the provided delta time between the two hands.
+    /// </summary>
+    public static void FillTemporalData(this Hand toFill,
+                                        Hand previousHand, float deltaTime) {
+      toFill.PalmVelocity = (toFill.PalmPosition - previousHand.PalmPosition)
+                             / deltaTime;
+    }
+    
+    #region Frame Utils
+
+    public static Hand Get(this Frame frame, Chirality whichHand) {
+      return frame.Hands.Query().FirstOrDefault(h => h.IsLeft == (whichHand == Chirality.Left));
+    }
+
+    #endregion
+
+    #region Provider Utils
+
+    public static Hand Get(this LeapProvider provider, Chirality whichHand) {
+      Frame frame;
+      if (Time.inFixedTimeStep) {
+        frame = provider.CurrentFixedFrame;
+      }
+      else {
+        frame = provider.CurrentFrame;
+      }
+
+      return frame.Get(whichHand);
+    }
+
+    #endregion
 
   }
 

@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) Leap Motion, Inc. 2011-2017.                                 *
- * Leap Motion proprietary and  confidential.                                 *
+ * Copyright (C) Leap Motion, Inc. 2011-2018.                                 *
+ * Leap Motion proprietary and confidential.                                  *
  *                                                                            *
  * Use subject to the terms of the Leap Motion SDK Agreement available at     *
  * https://developer.leapmotion.com/sdk_agreement, or another agreement       *
@@ -9,11 +9,20 @@
 
 using UnityEngine;
 using System;
-using System.Collections;
 
 namespace Leap.Unity {
-  /**LeapProvider's supply images and Leap Hands */
+
+  using TestHandPose = TestHandFactory.TestHandPose;
+
+  /// <summary>
+  /// Provides Frame object data to the Unity application by firing events as soon
+  /// as Frame data is available. Frames contain all currently tracked Hands in view
+  /// of the Leap Motion Controller.
+  /// </summary>
   public abstract class LeapProvider : MonoBehaviour {
+
+    public TestHandPose editTimePose = TestHandPose.HeadMountedA;
+
     public event Action<Frame> OnUpdateFrame;
     public event Action<Frame> OnFixedFrame;
 
@@ -48,5 +57,15 @@ namespace Leap.Unity {
         OnFixedFrame(frame);
       }
     }
+
+  }
+
+  public static class LeapProviderExtensions {
+
+    public static Leap.Hand MakeTestHand(this LeapProvider provider, bool isLeft) {
+      return TestHandFactory.MakeTestHand(isLeft, Hands.Provider.editTimePose)
+                            .Transform(UnityMatrixExtension.GetLeapMatrix(Hands.Provider.transform));
+    }
+
   }
 }
