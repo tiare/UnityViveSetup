@@ -1,11 +1,11 @@
-/******************************************************************************
- * Copyright (C) Leap Motion, Inc. 2011-2018.                                 *
- * Leap Motion proprietary and confidential.                                  *
- *                                                                            *
- * Use subject to the terms of the Leap Motion SDK Agreement available at     *
- * https://developer.leapmotion.com/sdk_agreement, or another agreement       *
- * between Leap Motion and you, your company or other organization.           *
- ******************************************************************************/
+    /******************************************************************************
+     * Copyright (C) Leap Motion, Inc. 2011-2018.                                 *
+     * Leap Motion proprietary and confidential.                                  *
+     *                                                                            *
+     * Use subject to the terms of the Leap Motion SDK Agreement available at     *
+     * https://developer.leapmotion.com/sdk_agreement, or another agreement       *
+     * between Leap Motion and you, your company or other organization.           *
+     ******************************************************************************/
 
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -253,6 +253,21 @@ namespace Leap.Unity {
       }
       //Otherwise return to pool
       modelGroup.ReturnToGroup(model);
+    }
+
+    //added by Tiare
+    public int GetHandPoolSize ()
+    {
+        return ModelPool.Count;
+    }
+
+    //added by Tiare
+    public string GetHandModelName (int idx)
+    {
+        if (idx >= GetHandPoolSize())
+            return "";
+        else
+            return ModelPool[idx].GroupName;
     }
 
     #endregion
